@@ -8,24 +8,7 @@
 import SwiftUI
 
 struct OnBoardingView: View {
-    var onBoardingItems: [OnboardingItem] = [
-        OnboardingItem(
-            title: "Layout",
-            details: "You can easily change the screen display from horizontal to vertical with LazyVGrid.",
-            imageName: "part1"
-        ),
-        OnboardingItem(
-            title: "Dark and Light",
-            details: "Swiftly switch between dark and light mode.",
-            imageName: "part2"
-        ),
-        OnboardingItem(
-            title: "Side Bar",
-            details: "With Side Bar. Move between different screens using drag gesture with animation.",
-            imageName: "part3"
-        ),
-    ]
-    
+    let onBoardingItems = OnboardingItemData.onBoardingItems
     @Binding var currentIndex: Int
     
     var body: some View {
@@ -58,32 +41,4 @@ struct OnBoardingView: View {
 #Preview {
     OnBoardingView(currentIndex: .constant(0))
         .preferredColorScheme(.dark)
-}
-
-struct OnboardingItem: Identifiable {
-    var id: UUID = UUID()
-    var title: String
-    var details: String
-    var imageName: String
-}
-
-struct DetailView: View {
-    var data: OnboardingItem
-    var items: Int
-    var currentIndex: Int
-    var imageName: String
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            Text("\(currentIndex + 1) of \(items)").font(.title3).bold().foregroundStyle(.primary)
-            Text(data.title).font(.system(size: 40)).bold().foregroundStyle(.primary)
-            Text(data.details).font(.title3).foregroundStyle(.secondary)
-            Image(imageName)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .padding(.top, 40)
-        }
-        .padding()
-        .frame(maxHeight: .infinity, alignment: .top)
-    }
 }
