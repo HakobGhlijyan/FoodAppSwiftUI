@@ -44,11 +44,6 @@ struct GlowGradientButton: View {
         .scaleEffect(isPressed ? 0.95 : 1)
         .animation(.easeInOut(duration: 0.2), value: isPressed)
         .simultaneousGesture(gesture)
-//        .onTapGesture {
-//            withAnimation {
-//                action()
-//            }
-//        }
     }
     
     private var gesture: some Gesture {
