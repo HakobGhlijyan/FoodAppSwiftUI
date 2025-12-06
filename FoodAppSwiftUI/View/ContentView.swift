@@ -20,34 +20,39 @@ struct ContentView: View {
         guard !searchText.isEmpty else { return foods }
         return foods.filter({ $0.name.localizedStandardContains(searchText)} )
     }
-
+        
     var body: some View {
-        VStack {
-            VStack(spacing: 12) {
-                header
-                searchRow
-            }
-            .padding(.vertical, 8)
-
-            ScrollView(showsIndicators: false) {
-                Group {
-                    if !showGridOrList {
-                        LazyVGrid(columns: columnsGrid, spacing: 12) {
-                            ForEach(filteredFoods) { food in
-                                GridRowView(purchaseCard: purchaseCard, food: food, namespace: namespace)
+        ZStack {
+            Color.gray.opacity(0.3).ignoresSafeArea()
+            
+            VStack {
+                VStack(spacing: 12) {
+                    header
+                        .topPaddingForDevice()
+                    searchRow
+                }
+                .padding(.vertical, 8)
+                
+                ScrollView(showsIndicators: false) {
+                    Group {
+                        if !showGridOrList {
+                            LazyVGrid(columns: columnsGrid, spacing: 12) {
+                                ForEach(filteredFoods) { food in
+                                    GridRowView(purchaseCard: purchaseCard, food: food, namespace: namespace)
+                                }
                             }
-                        }
-                    } else {
-                        LazyVGrid(columns: columnsList, spacing: 12) {
-                            ForEach(filteredFoods) { food in
-                                ListRowView(purchaseCard: purchaseCard, food: food, namespace: namespace)
+                        } else {
+                            LazyVGrid(columns: columnsList, spacing: 12) {
+                                ForEach(filteredFoods) { food in
+                                    ListRowView(purchaseCard: purchaseCard, food: food, namespace: namespace)
+                                }
                             }
                         }
                     }
+                    .padding(.horizontal, 12)
                 }
-                .padding(.horizontal, 12)
+                .animation(.spring, value: searchText)
             }
-            .animation(.spring, value: searchText)
         }
     }
     
@@ -112,3 +117,40 @@ struct ContentView: View {
 #Preview {
     ContentView(purchaseCard: PurchaseCard())
 }
+
+extension View {
+    func topPaddingForDevice() -> some View {
+        let topInset: CGFloat
+        let window = UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .first?.windows.first
+        
+        let safeTop = window?.safeAreaInsets.top ?? 0
+        
+        if safeTop <= 20 {
+            // iPhone SE или другие без выреза
+            topInset = 20
+        } else {
+            // iPhone с island / Dynamic Island
+            topInset = 55
+        }
+        
+        return self.padding(.top, topInset)
+    }
+}
+
+/*
+ 1️⃣ Safe area top (верхний inset) на разных iPhone
+ Пояснение:
+     •    «Island» / notch → устройства с верхним вырезом, top safe area ≥44 pt.
+     •    iPhone SE / iPhone 8 → без island, top safe area ~20 pt.
+     •    iPhone 13 обычный → у него не “остров”, а обычный notch, top safe area ~47 pt.
+     •    iPhone 14 Pro / 15 Pro → у них настоящий «Dynamic Island», top safe area ~59 pt.
+ ⸻
+ 2️⃣ Вывод для твоей задачи с padding
+ Если хочешь, чтобы padding был:
+     •    iPhone SE / 8 / без island → 20 pt
+     •    iPhone с обычным notch (iPhone X, 11, 12, 13) → 50 pt
+     •    iPhone с Dynamic Island (iPhone 14 Pro, 15 Pro) → 50 pt (можно увеличить, если хочешь больше)
+ То код с проверкой через safeAreaInsets.top будет работать для всех этих случаев.
+ */
