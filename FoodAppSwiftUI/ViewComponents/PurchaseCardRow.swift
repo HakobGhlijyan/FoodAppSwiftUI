@@ -1,5 +1,5 @@
 //
-//  ListRowView.swift
+//  PurchaseCardRow.swift
 //  FoodAppSwiftUI
 //
 //  Created by Hakob Ghlijyan on 12/5/25.
@@ -7,11 +7,9 @@
 
 import SwiftUI
 
-struct ListRowView: View {
-    @ObservedObject var purchaseCard: PurchaseCard
+struct PurchaseCardRow: View {
     let food: FoodItem
-    var namespace: Namespace.ID
-
+    
     var body: some View {
         HStack {
             Image(food.image)
@@ -19,8 +17,7 @@ struct ListRowView: View {
                 .scaledToFill()
                 .frame(width: 60, height: 60)
                 .padding(.leading, 10)
-                .matchedGeometryEffect(id: food.image, in: namespace)
-
+            
             VStack(alignment: .leading, spacing: 10) {
                 Text(food.name)
                     .font(.system(size: 14, weight: .bold, design: .monospaced))
@@ -38,29 +35,17 @@ struct ListRowView: View {
                             .font(.system(size: 10, weight: .medium, design: .monospaced))
                     }
                 }
-                .padding(.trailing, 40)
+                .padding(.trailing, 10)
             }
         }
-        .frame(height: 80)
+        .frame(height: 70)
         .background(.shapec, in: .rect(cornerRadius: 16, style: .continuous))
-        .overlay(alignment: .topTrailing) {
-            Button {
-                purchaseCard.allFoodsInCard.append(food)
-            } label: {
-                Image(systemName: "plus")
-                    .font(.system(.headline))
-                    .padding(10)
-                    .background(Color(.systemGray5), in: .roundedCorner(16, corners: [.bottomLeft, .topRight]))
-            }
-            .foregroundStyle(.primary)
-        }
     }
 }
 
-struct ListRowView_Previews: PreviewProvider {
-    @Namespace static var namespace
-    
+struct PurchaseCardRow_Previews: PreviewProvider {
     static var previews: some View {
-        ListRowView(purchaseCard: PurchaseCard(), food: FoodItemData.foodsMock[6], namespace: namespace)
+        PurchaseCardRow(food: FoodItemData.foodsMock[6])
+//            .preferredColorScheme(.dark)
     }
 }

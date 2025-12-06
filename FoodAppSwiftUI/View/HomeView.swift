@@ -8,8 +8,14 @@
 import SwiftUI
 
 struct HomeView: View {
+    @StateObject private var purchaseCard = PurchaseCard()
+    
     var body: some View {
-        ContentView()
+        ZStack {
+            ContentView(purchaseCard: purchaseCard)
+
+//            PurchaseCardView(purchaseCard: purchaseCard)
+        }
     }
 }
 

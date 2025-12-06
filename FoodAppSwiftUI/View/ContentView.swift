@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var show: Bool = false
+    @ObservedObject var purchaseCard: PurchaseCard
     @Namespace private var namespace
     @State private var showGridOrList: Bool = false
     private let columnsGrid = Array(repeating: GridItem(), count: 2)
@@ -27,26 +27,25 @@ struct ContentView: View {
                 header
                 searchRow
             }
-            .padding(.bottom, 12)
+            .padding(.vertical, 8)
 
             ScrollView(showsIndicators: false) {
                 Group {
                     if !showGridOrList {
                         LazyVGrid(columns: columnsGrid, spacing: 12) {
                             ForEach(filteredFoods) { food in
-                                GridRowView(food: food, namespace: namespace)
+                                GridRowView(purchaseCard: purchaseCard, food: food, namespace: namespace)
                             }
                         }
                     } else {
                         LazyVGrid(columns: columnsList, spacing: 12) {
                             ForEach(filteredFoods) { food in
-                                ListRowView(food: food, namespace: namespace)
+                                ListRowView(purchaseCard: purchaseCard, food: food, namespace: namespace)
                             }
                         }
                     }
                 }
                 .padding(.horizontal, 12)
-                .padding(.top, 8)
             }
             .animation(.spring, value: searchText)
         }
@@ -62,7 +61,7 @@ struct ContentView: View {
             }
             Spacer()
             Button {
-            
+
             } label: {
                 Image(.imageRec)
                     .resizable()
@@ -111,7 +110,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
-//        .preferredColorScheme(.dark)
+    ContentView(purchaseCard: PurchaseCard())
 }
-
