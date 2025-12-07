@@ -19,12 +19,32 @@
 - **Кастомные UI-компоненты**: `GlowGradientButton`, `SideViewButton`, `RoundedCorner`.
 
 ---
+## 🔹 Видео-демонстрация
+<!-- Или, если у вас короткий GIF -->
+![Demo GIF](docs/demoVideo.gif)
+---
 
-## 🖼 Превью UI
-
-| Онбординг | Главный экран | Корзина |
-|-----------|---------------|---------|
-| ![Onboarding](docs/onboarding.png) | ![Home](docs/home.png) | ![Cart](docs/cart.png) |
+## 🖼 Превью UI 🔹 Скриншоты
+<div style="display:flex; gap:10px; flex-wrap: wrap;">
+  <img src="docs/onboarding1.png" width="400"/>
+  <img src="docs/onboarding2.png" width="400">
+  <img src="docs/onboarding3.png" width="400">
+</div>
+<div style="display:flex; gap:10px; flex-wrap: wrap;">
+  <img src="docs/home1.png" width="400"/>
+  <img src="docs/home2.png" width="400">
+</div>
+<div style="display:flex; gap:10px; flex-wrap: wrap;">
+  <img src="docs/cart1.png" width="400"/>
+  <img src="docs/card2.png" width="400">
+</div>
+<div style="display:flex; gap:10px; flex-wrap: wrap;">
+  <img src="docs/side.png" width="400"/>
+</div>
+<div style="display:flex; gap:10px; flex-wrap: wrap;">
+  <img src="docs/dark1.png" width="400">
+  <img src="docs/dark2.png" width="400">
+</div>
 
 - **GridRowView** — отображение продукта в сетке.
 - **ListRowView** — отображение продукта в списке.
