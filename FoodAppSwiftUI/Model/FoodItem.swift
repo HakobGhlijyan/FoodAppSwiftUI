@@ -7,19 +7,27 @@
 
 import Foundation
 
-//struct FoodItem: Identifiable, Hashable {
-//    var id: UUID = UUID()
-//    var name: String
-//    var price: Double
-//    var rating: Double
-//    var image: String
-//}
-
+// MARK: - FoodItem
+/// A model representing a single food product displayed in the application.
+///
+/// `FoodItem` conforms to `Identifiable` and `Hashable` so it can be used
+/// in SwiftUI lists, `ForEach`, and as dictionary keys (e.g., in the cart).
+///
+/// The `id` is derived from the `name`, ensuring that each food item is
+/// uniquely identified by its display name.
 struct FoodItem: Identifiable, Hashable {
+    /// The unique identifier for this food item.
+    ///
+    /// Uses the food name as the identifier, allowing consistent identity
+    /// across the UI and when storing items in dictionaries.
     var id: String { name } // теперь одинаковые имена → один ключ
+    /// The display name of the food item.
     var name: String
+    /// The price of the food item in USD.
     var price: Double
+    /// A user-visible rating value from 0.0 to 5.0.
     var rating: Double
+    /// The name of the image asset associated with this food item.
     var image: String
 }
 

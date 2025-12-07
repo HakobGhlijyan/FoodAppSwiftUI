@@ -7,6 +7,14 @@
 
 import SwiftUI
 
+// MARK: - Navigation Embedding
+/// Wraps the current view into a navigation container.
+///
+/// - Returns: A view embedded inside `NavigationStack` on iOS 16+ or `NavigationView` on older versions.
+///
+/// This modifier standardizes navigation usage across iOS versions.
+/// Use it when you want consistent navigation behavior without manually
+/// checking the iOS version in each view.
 extension View {
     @ViewBuilder func embedNavigation() -> some View {
         if #available(iOS 16, *) {
@@ -17,6 +25,17 @@ extension View {
     }
 }
 
+// MARK: - Dynamic Top Padding
+/// Applies adaptive top padding based on the device’s safe area.
+///
+/// Logic:
+/// - Devices without notch (e.g., iPhone SE) → `20pt`
+/// - Devices with notch or Dynamic Island → `55pt`
+///
+/// This ensures consistent visual spacing for headers and top UI elements
+/// across all iPhones regardless of screen type.
+///
+/// - Returns: A view with automatically calculated `.padding(.top)`
 extension View {
     func topPaddingForDevice() -> some View {
         let topInset: CGFloat

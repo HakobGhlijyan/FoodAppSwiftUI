@@ -7,11 +7,35 @@
 
 import SwiftUI
 
+// MARK: - GridRowView
+/// A single grid cell view representing a food item in a collection/grid layout.
+///
+/// `GridRowView` displays the food image, name, price, and rating,
+/// and provides a '+' button to add the item to the purchase cart.
+///
+/// - Properties:
+///   - purchaseCard: The shared cart manager (`PurchaseCard`) for adding items.
+///   - food: The `FoodItem` to display.
+///   - namespace: A `Namespace.ID` used for matched geometry animations.
+///
+/// - Usage:
+/// ```swift
+/// GridRowView(purchaseCard: purchaseCard, food: foodItem, namespace: namespace)
+/// ```
 struct GridRowView: View {
+    /// The cart manager used to add items when the '+' button is tapped.
     @ObservedObject var purchaseCard: PurchaseCard
+    /// The food item displayed in this grid cell.
     let food: FoodItem
+    /// The namespace used for matched geometry animations for smooth transitions.
     var namespace: Namespace.ID
 
+    /// The view hierarchy for the grid cell.
+    ///
+    /// Displays:
+    /// - Food image with matched geometry animation
+    /// - Food name, price, and precise rating
+    /// - '+' button overlay to add the item to the cart
     var body: some View {
         VStack {
             Image(food.image)

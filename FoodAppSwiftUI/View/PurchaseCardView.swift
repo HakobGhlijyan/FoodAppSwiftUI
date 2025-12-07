@@ -7,9 +7,29 @@
 
 import SwiftUI
 
+// MARK: - PurchaseCardView
+/// A view displaying the user's food cart and its contents.
+///
+/// `PurchaseCardView` observes a `PurchaseCard` object and displays either
+/// an empty basket placeholder or a scrollable list of added food items.
+///
+/// Each row shows the food item, its quantity, and allows further interaction.
+///
+/// - Properties:
+///   - purchaseCard: The observed cart object managing food items and totals.
+///
+/// Usage:
+/// ```swift
+/// PurchaseCardView(purchaseCard: purchaseCard)
+/// ```
 struct PurchaseCardView: View {
+    /// The cart manager observed by this view to display food items and totals.
     @ObservedObject var purchaseCard: PurchaseCard
     
+    /// The main view hierarchy of the purchase card.
+    ///
+    /// Displays a title, checks if the cart is empty, and either shows
+    /// an empty placeholder or a scrollable list of `PurchaseCardRow` views.
     var body: some View {
         VStack {
             Text("Food Orders")

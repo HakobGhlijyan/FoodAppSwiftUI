@@ -32,7 +32,16 @@ import SwiftUI
 //    }
 }
 
-//1
+// MARK: - RatingViewAnimation
+/// A simple interactive star rating view allowing selection of integer ratings from 1 to 5.
+///
+/// `RatingViewAnimation` displays stars horizontally and updates the selected rating
+/// when a star is tapped. Filled stars are shown in yellow, and empty stars in gray.
+///
+/// Usage:
+/// ```swift
+/// RatingViewAnimation()
+/// ```
 struct RatingViewAnimation: View {
     @State private var rating: Int = 0
     var body: some View {

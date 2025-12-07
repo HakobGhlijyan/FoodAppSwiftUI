@@ -5,13 +5,37 @@
 //  Created by Hakob Ghlijyan on 12/5/25.
 //
 
+// MARK: - ListRowView
+/// A single row view representing a food item in a scrollable list.
+///
+/// `ListRowView` displays the food image, name, price, rating, and a '+' button
+/// to add the item to the purchase cart.
+///
+/// - Properties:
+///   - purchaseCard: The shared cart manager (`PurchaseCard`) for adding items.
+///   - food: The `FoodItem` to display.
+///   - namespace: A `Namespace.ID` for matched geometry animations.
+///
+/// - Usage:
+/// ```swift
+/// ListRowView(purchaseCard: purchaseCard, food: foodItem, namespace: namespace)
+/// ```
 import SwiftUI
 
 struct ListRowView: View {
+    /// The cart manager used to add items when the '+' button is tapped.
     @ObservedObject var purchaseCard: PurchaseCard
+    /// The food item displayed in this row.
     let food: FoodItem
+    /// The namespace used for matched geometry animations.
     var namespace: Namespace.ID
 
+    /// The view hierarchy for the list row.
+    ///
+    /// Displays:
+    /// - Food image with matched geometry animation
+    /// - Food name, price, and precise rating
+    /// - '+' button overlay to add item to the cart
     var body: some View {
         HStack {
             Image(food.image)

@@ -7,10 +7,28 @@
 
 import SwiftUI
 
+// MARK: - PurchaseCardRow
+/// A row view representing a single food item in the purchase/cart list.
+///
+/// `PurchaseCardRow` displays the food image, name, price, rating, and quantity.
+/// It is used inside a list or scroll view of the cart to show each added item.
+///
+/// - Properties:
+///   - food: The `FoodItem` model to display.
+///   - count: The quantity of this food item in the cart.
 struct PurchaseCardRow: View {
+    /// The food item displayed in this row.
     let food: FoodItem
+    /// The number of this item in the cart.
     var count: Int
     
+    /// The view hierarchy for the cart row.
+    ///
+    /// Displays:
+    /// - Food image with fixed size
+    /// - Food name with truncation and styling
+    /// - Price and rating (with stars)
+    /// - Quantity overlay in top trailing corner
     var body: some View {
         HStack {
             Image(food.image)
