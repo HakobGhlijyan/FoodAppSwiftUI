@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject private var purchaseCard = PurchaseCard()
+    @State private var selectionTab: ContentViewSelection = .home
     @State private var show: Bool = false
     @State private var dragging: CGSize = .zero
     @State private var position: CGSize = .zero
@@ -16,17 +17,42 @@ struct HomeView: View {
     
     var body: some View {
         ZStack {
-            ContentView(purchaseCard: purchaseCard)
-                .mask { RoundedRectangle(cornerRadius: min(dragging.width + position.width / 5, 50), style: .continuous)}
-                .scaleEffect(scale)
+            switch selectionTab {
+            case .home:
+                TabViewContentWrapper(dragging: dragging, position: position, scale: scale) {
+                    ContentView(purchaseCard: purchaseCard, show: $show)
+                }
+            case .purchase:
+                TabViewContentWrapper(dragging: dragging, position: position, scale: scale) {
+                    PurchaseCardView(purchaseCard: purchaseCard)
+                }
+            case .favorite:
+                TabViewContentWrapper(dragging: dragging, position: position, scale: scale) {
+                    Text("Favorite").frame(maxWidth: .infinity, maxHeight: .infinity) .background(.bc)
+                }
+            case .trash:
+                TabViewContentWrapper(dragging: dragging, position: position, scale: scale) {
+                    Text("Trash").frame(maxWidth: .infinity, maxHeight: .infinity) .background(.bc)
+                }
+            }
+            
+            SideView(selectionTab: $selectionTab)
+                .offset(x: -220)
                 .offset(x: max(min(dragging.width + position.width, 220), 0))
-                .gesture(
-                    DragGesture()
-                        .onChanged(openGestureOnChange)
-                        .onEnded(closeGestureOnEnded)
-                )
         }
+        .gesture(
+            DragGesture()
+                .onChanged(openGestureOnChange)
+                .onEnded(closeGestureOnEnded)
+        )
         .ignoresSafeArea()
+        .onChange(of: show) { newValue in
+            withAnimation {
+                if show { open() } else { close() }
+            }
+        }.onChange(of: selectionTab) { newValue in
+            withAnimation { close() }
+        }
     }
     
     private func openGestureOnChange(value: DragGesture.Value) {
@@ -53,10 +79,19 @@ struct HomeView: View {
             dragging.width = .zero
         }
     }
+    
+    private func open() {
+        dragging.width = 220
+        position.width = 220
+        scale = 0.9
+    }
+    private func close() {
+        dragging.width = 0
+        position.width = 0
+        scale = 1
+    }
 }
 
 #Preview {
     HomeView()
 }
-
-//35.35

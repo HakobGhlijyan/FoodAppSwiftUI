@@ -26,8 +26,8 @@ struct GlowGradientButton: View {
             Text(title)
                 .font(.system(size: 24))
                 .fontWeight(.medium)
-                .frame(width: 280, height: 60)
-                .background(.bcolor, in: .rect(cornerRadius: 20))
+                .frame(width: 280, height: 50)
+                .background(.appButton, in: .rect(cornerRadius: 20))
                 .foregroundStyle(.white)
                 .overlay {
                     RoundedRectangle(cornerRadius: 20, style: .continuous)
@@ -62,5 +62,5 @@ struct GlowGradientButton: View {
     GlowGradientButton(title: "Next", action: {
         print("Next \(Date())")
     })
-    .preferredColorScheme(.dark)
+//    .preferredColorScheme(.dark)
 }

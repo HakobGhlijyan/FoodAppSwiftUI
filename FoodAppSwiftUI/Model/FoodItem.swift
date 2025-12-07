@@ -7,8 +7,16 @@
 
 import Foundation
 
-struct FoodItem: Identifiable {
-    var id: UUID = UUID()
+//struct FoodItem: Identifiable, Hashable {
+//    var id: UUID = UUID()
+//    var name: String
+//    var price: Double
+//    var rating: Double
+//    var image: String
+//}
+
+struct FoodItem: Identifiable, Hashable {
+    var id: String { name } // теперь одинаковые имена → один ключ
     var name: String
     var price: Double
     var rating: Double

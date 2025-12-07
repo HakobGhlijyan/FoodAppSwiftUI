@@ -17,6 +17,7 @@ struct RootView: View {
                     .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
             } else {
                 HomeView()
+                    .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
             }
         }
     }
@@ -24,5 +25,4 @@ struct RootView: View {
 
 #Preview {
     RootView()
-        .preferredColorScheme(.dark)
 }

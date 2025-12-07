@@ -45,12 +45,12 @@ struct ListRowView: View {
         .background(.shapec, in: .rect(cornerRadius: 16, style: .continuous))
         .overlay(alignment: .topTrailing) {
             Button {
-                purchaseCard.allFoodsInCard.append(food)
+                purchaseCard.appendInCard(item: food)
             } label: {
                 Image(systemName: "plus")
                     .font(.system(.headline))
                     .padding(10)
-                    .background(Color(.systemGray5), in: .roundedCorner(16, corners: [.bottomLeft, .topRight]))
+                    .background(Color(.systemGray4), in: .roundedCorner(16, corners: [.bottomLeft, .topRight]))
             }
             .foregroundStyle(.primary)
         }
@@ -62,5 +62,6 @@ struct ListRowView_Previews: PreviewProvider {
     
     static var previews: some View {
         ListRowView(purchaseCard: PurchaseCard(), food: FoodItemData.foodsMock[6], namespace: namespace)
+            .preferredColorScheme(.dark)
     }
 }

@@ -16,8 +16,10 @@ struct PurchaseCardView: View {
                 .font(.largeTitle).bold()
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading)
+                .padding(.top, 20)
+                .topPaddingForDevice()
             Group {
-                if purchaseCard.allFoodsInCard.isEmpty {
+                if purchaseCard.allFoodsInCardByCount.isEmpty {
                     VStack(spacing: 10) {
                         Image(systemName: "takeoutbag.and.cup.and.straw")
                             .font(.system(size: 80))
@@ -26,12 +28,11 @@ struct PurchaseCardView: View {
                         Text("Tap the + button add food to your basket")
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .ignoresSafeArea()
                 } else {
                     ScrollView {
                         VStack {
-                            ForEach(purchaseCard.allFoodsInCard) { food in
-                                PurchaseCardRow(food: food)
+                            ForEach(Array(purchaseCard.allFoodsInCardByCount), id: \.key) { (food, count) in
+                                PurchaseCardRow(food: food, count: count)
                             }
                         }
                         .padding(.horizontal)

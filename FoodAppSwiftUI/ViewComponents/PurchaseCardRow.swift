@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PurchaseCardRow: View {
     let food: FoodItem
+    var count: Int
     
     var body: some View {
         HStack {
@@ -39,13 +40,21 @@ struct PurchaseCardRow: View {
             }
         }
         .frame(height: 70)
-        .background(.shapec, in: .rect(cornerRadius: 16, style: .continuous))
+        .background(.shapec, in: .rect(cornerRadius: 20, style: .continuous))
+        .overlay(alignment: .topTrailing) {
+            Text("Count: \(count)")
+                .font(.system(size: 12, weight: .medium, design: .monospaced))
+                .foregroundStyle(.primary)
+                .padding(8)
+                .padding(.horizontal, 2)
+                .background(Color(.systemGray4), in: .roundedCorner(16, corners: [.bottomLeft, .topRight]))
+        }
     }
 }
 
 struct PurchaseCardRow_Previews: PreviewProvider {
     static var previews: some View {
-        PurchaseCardRow(food: FoodItemData.foodsMock[6])
-//            .preferredColorScheme(.dark)
+        PurchaseCardRow(food: FoodItemData.foodsMock[6], count: 2)
+            .preferredColorScheme(.dark)
     }
 }

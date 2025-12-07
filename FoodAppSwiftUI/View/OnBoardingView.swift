@@ -40,5 +40,7 @@ struct OnBoardingView: View {
 
 #Preview {
     OnBoardingView(currentIndex: .constant(0))
-        .preferredColorScheme(.dark)
+//    OnBoardingView(currentIndex: .constant(1))
+//    OnBoardingView(currentIndex: .constant(2))
+//        .preferredColorScheme(.dark)
 }

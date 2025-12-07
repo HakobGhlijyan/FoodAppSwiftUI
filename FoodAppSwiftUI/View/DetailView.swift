@@ -5,7 +5,6 @@
 //  Created by Hakob Ghlijyan on 12/4/25.
 //
 
-
 import SwiftUI
 
 struct DetailView: View {
@@ -15,13 +14,18 @@ struct DetailView: View {
     var imageName: String
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            Text("\(currentIndex + 1) of \(items)").font(.title3).bold().foregroundStyle(.primary)
-            Text(data.title).font(.system(size: 40)).bold().foregroundStyle(.primary)
-            Text(data.details).font(.title3).foregroundStyle(.secondary)
+        VStack(spacing: 10) {
+            VStack(alignment: .leading, spacing: 20) {
+                Text("\(currentIndex + 1) of \(items)").font(.title3).bold().foregroundStyle(.primary)
+                Text(data.title).font(.system(size: 40)).bold().foregroundStyle(.primary)
+                Text(data.details).font(.title3).foregroundStyle(.secondary)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+
             Image(imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
+                .frame(width: UIScreen.main.bounds.width - 60)
                 .padding(.top, 40)
         }
         .padding()
@@ -36,5 +40,5 @@ struct DetailView: View {
         currentIndex: 0,
         imageName: OnboardingItemData.onBoardingItems[0].imageName
     )
-        .preferredColorScheme(.dark)
+//    .preferredColorScheme(.dark)
 }
